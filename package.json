@@ -4,8 +4,9 @@
   "description": "or CMDB for short",
   "main": "movieDB.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mahmoudelali/Movie-DB.git"
