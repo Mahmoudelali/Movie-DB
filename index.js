@@ -82,10 +82,12 @@ app.get('/movies/read/by-title', (req, res) => {
 // Step 7
 app.get('/movies/read/id/:id', (req, res) => {
 	let found = false;
+	let targetIndex = null;
 	movies.forEach((movie) => {
 		for (let i in movie) {
 			if (movie[i] == req.params.id) {
 				found = !found;
+				targetIndex = i;
 			}
 			continue;
 		}
@@ -100,10 +102,27 @@ app.get('/movies/read/id/:id', (req, res) => {
 	});
 });
 
+// Step 8
+// ?title=<TITLE>&year=<YEAR>&rating=<RATING>
+app.post('/movies/add', (req, res) => {
+	const movie = {
+		title: req.query.title || null,
+		year: req.query.year || null,
+		rating: req.query.rating || 4,
+	};
+	if (movie.title == null || movie.year == null) {
+		res.status(403).send({
+			status: 403,
+			error: true,
+			message:
+				'you cannot create a movie without providing a title and a year',
+		});
+	} else {
+		movies.push(movie);
+		res.send(movie);
+	}
+});
 // port Listening
 app.listen(port, () => {
 	console.log(`listening on PORT : ${port}`);
 });
-
-
-
