@@ -79,10 +79,31 @@ app.get('/movies/read/by-title', (req, res) => {
 	});
 });
 
+// Step 7
+app.get('/movies/read/id/:id', (req, res) => {
+	let found = false;
+	movies.forEach((movie) => {
+		for (let i in movie) {
+			if (movie[i] == req.params.id) {
+				found = !found;
+			}
+			continue;
+		}
+		if (found) res.send({ status: 200, data: req.params.id });
+		else {
+			res.send({
+				status: 404,
+				error: true,
+				message: `the movie <${req.params.id}> does not exist`,
+			});
+		}
+	});
+});
+
 // port Listening
 app.listen(port, () => {
 	console.log(`listening on PORT : ${port}`);
 });
 
-// today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-// http://localhost:3000/test
+
+
