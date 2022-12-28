@@ -1,1 +1,1 @@
-http://localhost:3000/search?
+http://localhost:3000/movies/read
