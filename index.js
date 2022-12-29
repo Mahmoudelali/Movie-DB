@@ -122,7 +122,6 @@ app.post('/movies/add', (req, res) => {
 	}
 });
 
-
 // Step 9
 app.delete('/movies/delete/:id', (req, res) => {
 	let found = false;
@@ -131,7 +130,7 @@ app.delete('/movies/delete/:id', (req, res) => {
 	movies.forEach((movie) => {
 		for (let i in movie) {
 			if (movie[i] == req.params.id) {
-				found = true ;
+				found = true;
 				targetIndex = i;
 			}
 			continue;
@@ -148,8 +147,27 @@ app.delete('/movies/delete/:id', (req, res) => {
 	}
 });
 
+// Step 10
+
+
+
+app.put('/movies/update/:id', (req, res) => {
+	if (req.query.title) {
+		let pickedMovie = movies.find((movie) => movie.title == req.params.id);
+		pickedMovie.title = req.query.title;
+		res.send(pickedMovie);
+	}
+	else if(req.query.rating){
+		let pickedMovie = movies.find((movie) => movie.rating == req.params.id);
+		pickedMovie.rating = req.query.rating;
+		res.send(pickedMovie);	
+	}
+});
+
+
+//movies/update/<ID>?title=<NEW_TITLE>&rating=<NEW_RATING>
+
 // port Listening
 app.listen(port, () => {
 	console.log(`listening on PORT : ${port}`);
 });
-
