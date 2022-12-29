@@ -50,7 +50,6 @@ app.put('/movies/update', (req, res) => {});
 app.delete('/movies/delete', (req, res) => {});
 
 //Step 6
-
 // ordering movies by date
 app.get('/movies/read/by-date', (req, res) => {
 	res.send({
@@ -148,24 +147,22 @@ app.delete('/movies/delete/:id', (req, res) => {
 });
 
 // Step 10
-
-
-
 app.put('/movies/update/:id', (req, res) => {
 	if (req.query.title) {
 		let pickedMovie = movies.find((movie) => movie.title == req.params.id);
 		pickedMovie.title = req.query.title;
 		res.send(pickedMovie);
-	}
-	else if(req.query.rating){
+	} else if (req.query.rating) {
 		let pickedMovie = movies.find((movie) => movie.rating == req.params.id);
 		pickedMovie.rating = req.query.rating;
-		res.send(pickedMovie);	
+		res.send(pickedMovie);
 	}
 });
 
+//Step 11
+//i already used verbs while completing tasks !
+//i already used verbs while completing tasks !
 
-//movies/update/<ID>?title=<NEW_TITLE>&rating=<NEW_RATING>
 
 // port Listening
 app.listen(port, () => {
