@@ -103,7 +103,6 @@ app.get('/movies/read/id/:id', (req, res) => {
 });
 
 // Step 8
-// ?title=<TITLE>&year=<YEAR>&rating=<RATING>
 app.post('/movies/add', (req, res) => {
 	const movie = {
 		title: req.query.title || null,
@@ -122,7 +121,35 @@ app.post('/movies/add', (req, res) => {
 		res.send(movie);
 	}
 });
+
+
+// Step 9
+app.delete('/movies/delete/:id', (req, res) => {
+	let found = false;
+	let targetIndex = null;
+
+	movies.forEach((movie) => {
+		for (let i in movie) {
+			if (movie[i] == req.params.id) {
+				found = true ;
+				targetIndex = i;
+			}
+			continue;
+		}
+	});
+	movies.splice(targetIndex, 1);
+	if (found) res.send({ status: 200, data: movies });
+	else {
+		res.send({
+			status: 404,
+			error: true,
+			message: `the movie <${req.params.id}> does not exist`,
+		});
+	}
+});
+
 // port Listening
 app.listen(port, () => {
 	console.log(`listening on PORT : ${port}`);
 });
+
